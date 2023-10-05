@@ -1,0 +1,76 @@
+#############
+## Options ##
+#############
+set shellopts '-eu'
+set ifs "\n"
+set scrolloff 10
+set info size:time
+
+# previews: requires package 'stpv-git'
+set previewer stpv
+set cleaner stpvimgclr
+&stpvimg --listen $id
+cmd on-quit $stpvimg --end $id
+
+#####################
+## Custom commands ##
+#####################
+
+# Open and scope
+cmd open ${{
+    case $(file --mime-type "$(readlink -f $f)" -b) in
+	application/vnd.openxmlformats-officedocument.spreadsheetml.sheet) localc $fx ;;
+    image/vnd.djvu|application/pdf|application/octet-stream|application/postscript) setsid -f zaread $fx >/dev/null 2>&1 ;;
+        text/*|application/json|inode/x-empty) $EDITOR $fx;;
+	image/x-xcf) setsid -f gimp $f >/dev/null 2>&1 ;;
+	image/svg+xml) display -- $f ;;
+	image/*) setsid -f sxiv $f -a >/dev/null 2>&1 ;;
+	audio/*) mpv --audio-display=no $f ;;
+	video/*|application/octet-stream) setsid -f mpv $f -quiet >/dev/null 2>&1 ;;
+	application/pdf|application/vnd*|application/epub*) setsid -f zaread $fx >/dev/null 2>&1 ;;
+	application/pgp-encrypted) $EDITOR $fx ;;
+        *) for f in $fx; do setsid -f $OPENER $f >/dev/null 2>&1; done;;
+    esac
+}}
+
+# Rename
+cmd rename %[ -e "$1" ] && printf "File exists" || mv $f "$1"
+
+# Extract: requires 'atools' package
+cmd extract ${{
+	set -f
+	printf "%s\n\t" "$fx"
+	printf "Extract? [y/N]"
+	read ans
+	[ $ans = "y" ] && aunpack $fx
+}}
+
+# Ranger habits die hard
+cmd bulkrename $vidir -v $fx
+
+# Shuffle current directory
+cmd shuffle $mpv --shuffle .
+
+###########
+## Binds ##
+###########
+map <enter> open
+map gh
+map g top
+#map r push :rename<space>"$fx"
+map r $vidir -v $fx
+map D delete $fx
+
+# sorting
+map O set reverse!
+map oo :{{
+    set sortby natural
+}}
+map om :{{
+    set reverse on
+    set sortby time
+}}
+map os :{{
+    set reverse on
+    set sortby size
+}}
