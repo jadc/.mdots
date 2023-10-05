@@ -1,0 +1,22 @@
+# open terminal, blazingly fast compared to iTerm/Hyper
+#cmd - return : /Applications/kitty.app/Contents/MacOS/kitty --single-instance -d ~
+
+# open qutebrowser
+#cmd + shift - return : ~/Scripts/qtb.sh
+
+# open mpv
+#cmd - m : open -na /Applications/mpv.app $(pbpaste)
+
+# open terminal
+#alt - return : open -a /Applications/Terminal.app
+
+# Yabai
+alt - j : yabai -m window --focus south
+alt - k : yabai -m window --focus north
+alt - h : yabai -m window --focus west
+alt - l : yabai -m window --focus east
+
+shift + alt - j : yabai -m window --swap south
+shift + alt - k : yabai -m window --swap north
+shift + alt - h : yabai -m window --swap west
+shift + alt - l : yabai -m window --swap east
