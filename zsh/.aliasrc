@@ -3,16 +3,8 @@
 # shortcuts
 alias \
 	v='$EDITOR' \
-	p='paru' \
-	pp='paru -Syu --noconfirm' \
 	py='python3' \
 	yt='yt-dlp' \
-	clear='tput reset' \
-	mycron='sudo crontab -u $USER -e' \
-	ig='instaloader --login=majideyes' \
-	myip='curl ifconfig.me' \
-	hss='hugo server --noHTTPCache' \
-	condainit='[ -f /opt/miniconda3/etc/profile.d/conda.sh ] && source /opt/miniconda3/etc/profile.d/conda.sh'
 
 # flags
 alias \
@@ -23,15 +15,10 @@ alias \
 	make='make -j$(nproc)' \
 	ffmpeg='ffmpeg -hide_banner' \
 	ffprobe='ffprobe -hide_banner' \
-	mpvm='mpv --profile=movie' \
-	ssh='TERM=xterm-color ssh' \
-	ag="ag --pager='less -XFR'" \
-	vidir='vidir -v' \
-	ytsub='yt-dlp --sub-lang en --write-auto-sub --skip-download'
 
 ## colors
 alias \
-	ls="ls -hN --color=auto --group-directories-first" \
+	ls="ls -h --color=auto" \
 	grep="grep --color=auto" \
 	fgrep='fgrep --color=auto' \
 	egrep='egrep --color=auto' \
@@ -43,6 +30,4 @@ alias \
 	cl="curl -F 'clbin=<-' https://clbin.com" \
 	gp='git add . && git commit -m "$(date +%Y-%m-%d_%H:%M:%S)" && git push' \
 	wavtoflac='flac --best --delete-input-file -e -p -V -f --keep-foreign-metadata *.wav' \
-	texview='latexmk -pdf -pvc *.tex' \
 	sharedir='python -m http.server 25566'
-   #sl='rm -f config.h; sudo make clean install' \

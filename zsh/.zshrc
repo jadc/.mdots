@@ -30,33 +30,16 @@ zstyle ':completion:*' matcher-list '' 'm:{[:lower:][:upper:]}={[:upper:][:lower
 autoload -Uz compinit
 compinit
 
-# LF stay in directory
-lfcd () {
-    tmp="$(mktemp)"
-    lf -last-dir-path="$tmp" "$@"
-    if [ -f "$tmp" ]; then
-        dir="$(cat "$tmp")"
-        rm -f "$tmp" >/dev/null
-        [ -d "$dir" ] && [ "$dir" != "$(pwd)" ] && cd "$dir"
-    fi
-}
-
-# Binds
-bindkey -s '^r' ' lfcd\n'
-bindkey -s '^f' ' cd "$(dirname "$(fzf)")"\n'
-bindkey -s '^t' ' $TERMINAL & disown\n'
-
 # Aesthetics
-## Requires lscolors-git
-source /usr/share/LS_COLORS/dircolors.sh
+export CLICOLOR=1
 
 ## Prompt
 PS1='%F{black}%1~%f %(!.%F{red}.%F{blue})$%f '
-fetch
+~/.mdots/fetch
 
 # Sources
 [ -f ~/.aliasrc ] && source ~/.aliasrc
 
 ## Syntax highlighting 
 ## (https://archlinux.org/packages/community/any/zsh-syntax-highlighting)
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+#source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
