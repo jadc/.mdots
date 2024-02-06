@@ -4,6 +4,7 @@
 alias \
 	v='$EDITOR' \
 	py='python3' \
+	python='python3' \
 	yt='yt-dlp' \
 
 # flags
